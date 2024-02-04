@@ -1,20 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { addCard, fetchCards, removeCard } from './card.actions'
-import { Card } from '../../models/Card'
-
-export const mokedCards: Card[] = [
-  { word: 'Hello', translation: 'Hola' },
-  { word: 'Goodbye', translation: 'Adiós' },
-  { word: 'Please', translation: 'Por favor' },
-  { word: 'Thank you', translation: 'Gracias' },
-  { word: 'Yes', translation: 'Sí' },
-  { word: 'No', translation: 'No' },
-  { word: 'Good morning', translation: 'Buenos días' },
-  { word: 'Good night', translation: 'Buenas noches' },
-  { word: 'I love you', translation: 'Te quiero' },
-  { word: 'Congratulations', translation: 'Felicidades' },
-]
+import { Card, mokedCards } from '../../models/Card'
 
 interface CardsState {
   cards: Card[]

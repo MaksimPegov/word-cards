@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { mokedCards } from './cards.reducer'
-import { Card } from '../../models/Card'
+import { Card, mokedCards } from '../../models/Card'
 
 const fetchCards = createAsyncThunk('cards/fetchCards', async () => {
   await new Promise((resolve) => setTimeout(resolve, 500))

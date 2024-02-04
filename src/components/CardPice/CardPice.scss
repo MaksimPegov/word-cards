@@ -1,0 +1,20 @@
+.CardPice {
+  border: solid 1px hsl(41, 52%, 11%);
+  border-radius: 10px;
+  transition: 0.3s;
+  height: 200px;
+  width: 500px;
+
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  margin: 20px;
+
+  &-Word {
+    margin: auto;
+  }
+
+  &_Flipped {
+    background-color: #f4eac6;
+  }
+}
