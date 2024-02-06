@@ -1,41 +1,112 @@
-import React, { useState } from 'react'
+import { cn } from '@bem-react/classname'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectCards } from './state/cards/cards.selectors'
+import { selectCards, selectCurrentCardIndex } from './state/cards/cards.selectors'
 import { AppDispatch } from './state/store'
 import { CardPice } from './components/CardPice/CardPice'
 import { Card } from './models/Card'
-import './App.css'
+import './App.scss'
+import { Button, Dialog, IconButton, Typography } from '@mui/material'
+import { CreateCard } from './components/CreateCard/CreateCard'
+import { addCard, fetchCards, removeCard } from './state/cards/card.actions'
+import { nextCard, previousCard } from './state/cards/cards.reducer'
+import { Add, Delete, NavigateBefore, NavigateNext } from '@mui/icons-material'
+
+const bem = cn('App')
 
 export const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const cards = useSelector(selectCards)
 
-  const [currentCard, setCurrentCard] = useState<Card>(cards[0])
+  const currentCardIndex = useSelector(selectCurrentCardIndex)
+  const [createDialog, setcreateDialog] = useState(false)
 
-  const nextCard = () => {
-    const currentCardIndex = cards.indexOf(currentCard)
-    if (currentCardIndex === cards.length - 1) {
-      setCurrentCard(cards[0])
-      return
-    }
-    setCurrentCard(cards[currentCardIndex + 1])
+  const nextCardHandler = () => {
+    dispatch(nextCard())
   }
 
-  const previouseCard = () => {
-    const currentCardIndex = cards.indexOf(currentCard)
-    if (currentCardIndex === 0) {
-      setCurrentCard(cards[cards.length - 1])
-      return
-    }
-    setCurrentCard(cards[currentCardIndex - 1])
+  const previouseCardHandler = () => {
+    dispatch(previousCard())
   }
+
+  const togleDialog = () => {
+    setcreateDialog((old) => !old)
+  }
+
+  const createCard = (card: Card) => {
+    dispatch(addCard(card))
+  }
+
+  const deleteCurrentCard = () => {
+    dispatch(removeCard(cards[currentCardIndex]))
+  }
+
+  useEffect(() => {
+    dispatch(fetchCards())
+  }, [])
 
   return (
-    <div className="App">
-      {cards.length === 0 ? 'No cards' : <CardPice card={currentCard} />}
-      <button onClick={previouseCard}>back</button>
-      <button onClick={nextCard}>next</button>
+    <div className={bem()}>
+      <div className={bem('CardComponent')}>
+        <IconButton
+          aria-label="priveous"
+          size="large"
+          className={bem('NavButton')}
+          onClick={nextCardHandler}
+        >
+          <NavigateBefore fontSize="inherit" />
+        </IconButton>
+
+        {cards.length === 0 ? (
+          <Typography
+            variant="overline"
+            display="block"
+            gutterBottom
+            fontSize={13}
+            margin={5}
+          >
+            {'No cards yet :('}
+          </Typography>
+        ) : (
+          <CardPice card={cards[currentCardIndex]} />
+        )}
+
+        <IconButton
+          aria-label="Next"
+          size="large"
+          className={bem('NavButton')}
+          onClick={previouseCardHandler}
+        >
+          <NavigateNext fontSize="inherit" />
+        </IconButton>
+      </div>
+
+      <div className={bem('Buttons')}>
+        <Button
+          variant="outlined"
+          startIcon={<Delete />}
+          size="large"
+          className={bem('Button')}
+          onClick={deleteCurrentCard}
+        >
+          Delete current
+        </Button>
+
+        <Button
+          variant="contained"
+          endIcon={<Add />}
+          size="large"
+          className={bem('Button')}
+          onClick={togleDialog}
+        >
+          Add new
+        </Button>
+      </div>
+
+      <Dialog open={createDialog} onClose={() => setcreateDialog(false)}>
+        <CreateCard createCard={createCard} closeDialog={togleDialog} />
+      </Dialog>
     </div>
   )
 }

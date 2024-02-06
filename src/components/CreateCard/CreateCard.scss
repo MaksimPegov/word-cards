@@ -1,0 +1,22 @@
+.CreateCard {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+
+  &-Buttons {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-Button {
+    margin: 20px 20px 0 20px !important;
+  }
+
+  &-Input {
+    margin: 20px 0 !important;
+  }
+}
+
+input {
+  autocomplete: off;
+}

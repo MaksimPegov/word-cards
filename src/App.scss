@@ -1,0 +1,25 @@
+.App {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+
+  &-CardComponent {
+    display: flex;
+    flex-direction: row;
+    margin: 50px 0;
+    align-items: center;
+  }
+
+  &-NavButton {
+    border-radius: 10px !important;
+  }
+
+  &-Buttons {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-Button {
+    margin: 0 20px !important;
+  }
+}
