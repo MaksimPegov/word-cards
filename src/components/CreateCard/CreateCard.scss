@@ -1,11 +1,11 @@
 .CreateCard {
-  display: flex;
   flex-direction: column;
+  display: flex;
   margin: 50px;
 
   &-Buttons {
-    display: flex;
     flex-direction: row;
+    display: flex;
   }
 
   &-Button {
@@ -15,8 +15,4 @@
   &-Input {
     margin: 20px 0 !important;
   }
-}
-
-input {
-  autocomplete: off;
 }

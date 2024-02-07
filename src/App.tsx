@@ -1,17 +1,18 @@
 import { cn } from '@bem-react/classname'
-import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { Button, Dialog, IconButton, Typography } from '@mui/material'
+import { Add, Delete, NavigateBefore, NavigateNext } from '@mui/icons-material'
 
 import { selectCards, selectCurrentCardIndex } from './state/cards/cards.selectors'
-import { AppDispatch } from './state/store'
-import { CardPice } from './components/CardPice/CardPice'
-import { Card } from './models/Card'
-import './App.scss'
-import { Button, Dialog, IconButton, Typography } from '@mui/material'
-import { CreateCard } from './components/CreateCard/CreateCard'
 import { addCard, fetchCards, removeCard } from './state/cards/card.actions'
 import { nextCard, previousCard } from './state/cards/cards.reducer'
-import { Add, Delete, NavigateBefore, NavigateNext } from '@mui/icons-material'
+import { AppDispatch } from './state/store'
+import { CreateCard } from './components/CreateCard/CreateCard'
+import { CardPice } from './components/CardPice/CardPice'
+import { Card } from './models/Card'
+
+import './App.scss'
 
 const bem = cn('App')
 

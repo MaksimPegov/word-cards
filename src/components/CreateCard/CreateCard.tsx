@@ -1,9 +1,9 @@
 import React from 'react'
+import { cn } from '@bem-react/classname'
 import { Button, TextField } from '@mui/material'
 
-import { cn } from '@bem-react/classname'
-import './CreateCard.scss'
 import { Card } from '../../models/Card'
+import './CreateCard.scss'
 
 const bem = cn('CreateCard')
 
@@ -38,6 +38,7 @@ export const CreateCard: React.FC<CreateCardProps> = ({ createCard, closeDialog 
         onChange={handleInputChange1}
         autoComplete="off"
       />
+
       <TextField
         id="standard-basic"
         label="Translation"
@@ -51,6 +52,7 @@ export const CreateCard: React.FC<CreateCardProps> = ({ createCard, closeDialog 
         <Button variant="text" onClick={closeDialog} className={bem('Button')}>
           cancel
         </Button>
+
         <Button variant="text" onClick={handleCreateCard} className={bem('Button')}>
           create
         </Button>

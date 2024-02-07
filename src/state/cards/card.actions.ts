@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { Card, mokedCards } from '../../models/Card'
+import { Card } from '../../models/Card'
 
 const fetchCards = createAsyncThunk('cards/fetchCards', async () => {
   const storage = localStorage.getItem('cards')
+
   if (storage) {
     return JSON.parse(storage)
   }
@@ -12,6 +13,7 @@ const fetchCards = createAsyncThunk('cards/fetchCards', async () => {
 
 const addCard = createAsyncThunk('cards/addCard', async (card: Card) => {
   const storage = localStorage.getItem('cards')
+
   if (storage) {
     const cards = JSON.parse(storage)
     cards.push(card)
@@ -25,6 +27,7 @@ const addCard = createAsyncThunk('cards/addCard', async (card: Card) => {
 
 const removeCard = createAsyncThunk('cards/removeCard', async (card: Card) => {
   const storage = localStorage.getItem('cards')
+  
   if (storage) {
     const cards = JSON.parse(storage)
     const newCards = cards.filter(

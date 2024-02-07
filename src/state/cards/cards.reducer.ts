@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import { addCard, fetchCards, removeCard } from './card.actions'
-import { Card, mokedCards } from '../../models/Card'
+import { Card } from '../../models/Card'
 
 interface CardsState {
   cards: Card[]
@@ -10,7 +11,7 @@ interface CardsState {
 }
 
 const initialState: CardsState = {
-  cards: mokedCards,
+  cards: [],
   currentCardIndex: 0,
   loading: false,
   error: null,

@@ -4,10 +4,10 @@
   display: flex;
 
   &-CardComponent {
-    display: flex;
     flex-direction: row;
-    margin: 50px 0;
     align-items: center;
+    display: flex;
+    margin: 50px 0;
   }
 
   &-NavButton {
@@ -15,8 +15,8 @@
   }
 
   &-Buttons {
-    display: flex;
     flex-direction: row;
+    display: flex;
   }
 
   &-Button {
