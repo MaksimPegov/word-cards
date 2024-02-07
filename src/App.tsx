@@ -1,7 +1,16 @@
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Typography,
+} from '@mui/material'
 import { cn } from '@bem-react/classname'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react'
-import { Button, Dialog, IconButton, Typography } from '@mui/material'
 import { Add, Delete, NavigateBefore, NavigateNext } from '@mui/icons-material'
 
 import { selectCards, selectCurrentCardIndex } from './state/cards/cards.selectors'
@@ -22,6 +31,7 @@ export const App: React.FC = () => {
 
   const currentCardIndex = useSelector(selectCurrentCardIndex)
   const [createDialog, setcreateDialog] = useState(false)
+  const [deleteConfirm, setDeleteConfirm] = useState(false)
 
   const nextCardHandler = () => {
     dispatch(nextCard())
@@ -31,8 +41,12 @@ export const App: React.FC = () => {
     dispatch(previousCard())
   }
 
-  const togleDialog = () => {
+  const togleCreateDialog = () => {
     setcreateDialog((old) => !old)
+  }
+
+  const togleDeleteDialog = () => {
+    setDeleteConfirm((old) => !old)
   }
 
   const createCard = (card: Card) => {
@@ -41,11 +55,12 @@ export const App: React.FC = () => {
 
   const deleteCurrentCard = () => {
     dispatch(removeCard(cards[currentCardIndex]))
+    setDeleteConfirm(false)
   }
 
   useEffect(() => {
     dispatch(fetchCards())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className={bem()}>
@@ -89,7 +104,7 @@ export const App: React.FC = () => {
           startIcon={<Delete />}
           size="large"
           className={bem('Button')}
-          onClick={deleteCurrentCard}
+          onClick={togleDeleteDialog}
         >
           Delete current
         </Button>
@@ -99,14 +114,42 @@ export const App: React.FC = () => {
           endIcon={<Add />}
           size="large"
           className={bem('Button')}
-          onClick={togleDialog}
+          onClick={togleCreateDialog}
         >
           Add new
         </Button>
       </div>
 
-      <Dialog open={createDialog} onClose={() => setcreateDialog(false)}>
-        <CreateCard createCard={createCard} closeDialog={togleDialog} />
+      <Dialog
+        open={createDialog}
+        onClose={() => setcreateDialog(false)}
+        className={bem('CreateDialog')}
+      >
+        <CreateCard createCard={createCard} closeDialog={togleCreateDialog} />
+      </Dialog>
+
+      <Dialog
+        open={deleteConfirm}
+        onClose={togleDeleteDialog}
+        className={bem('DeleteDialog')}
+        style={{ margin: '20px' }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          {'Are you sure you want to delete this card?'}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This action can not be undone, your cant get deleted card back.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={togleDeleteDialog}>Cancel</Button>
+          <Button onClick={deleteCurrentCard} autoFocus>
+            delete
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   )

@@ -1,11 +1,14 @@
 .CreateCard {
   flex-direction: column;
+  min-width: 350px;
   display: flex;
-  margin: 50px;
+  margin: 30px;
+  width: 20%;
 
   &-Buttons {
     flex-direction: row;
     display: flex;
+    align-self: center;
   }
 
   &-Button {
