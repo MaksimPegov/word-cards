@@ -1,9 +1,15 @@
+@import '/src/styles/styles.scss';
+
 .CreateCard {
   flex-direction: column;
   min-width: 350px;
   display: flex;
   margin: 30px;
-  width: 20%;
+  width: auto;
+
+  @media screen and (max-width: $screen-s-width) {
+    min-width: 0px;
+  }
 
   &-Buttons {
     flex-direction: row;

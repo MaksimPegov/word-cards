@@ -1,7 +1,16 @@
+@import './styles/styles.scss';
+
 .App {
   flex-direction: column;
   align-items: center;
   display: flex;
+
+  @media screen and (max-width: $screen-m-width) {
+    zoom: 0.7;
+  }
+  @media screen and (max-width: $screen-s-width) {
+    zoom: 0.6;
+  }
 
   &-CardComponent {
     flex-direction: row;
@@ -17,15 +26,20 @@
   &-Buttons {
     flex-direction: row;
     display: flex;
+    width: fit-content;
+
+    @media screen and (max-width: $screen-m-width) {
+      flex-direction: column-reverse !important;
+    }
   }
 
   &-Button {
-    margin: 0 20px !important;
+    margin: 20px !important;
+    width: 200px;
   }
 
   &-TestButton {
     position: fixed !important;
-    margin: 20px !important;
-    bottom: 0 !important;
+    bottom: 50px !important;
   }
 }

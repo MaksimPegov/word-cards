@@ -131,7 +131,7 @@ export const App: React.FC = () => {
           startIcon={<Shuffle />}
           size="large"
           variant="outlined"
-          className={'Button'}
+          className={bem('Button')}
           onClick={shuffleCardsHandler}
           disabled={shuffleDisabled}
         >
