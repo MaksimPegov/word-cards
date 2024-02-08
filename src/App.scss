@@ -23,13 +23,13 @@
   }
 
   &-Buttons {
-    flex-direction: row;
+    flex-direction: column;
     display: flex;
     width: fit-content;
 
-    @media screen and (max-width: $screen-m-width) {
-      flex-direction: column-reverse !important;
-    }
+    // @media screen and (max-width: $screen-m-width) {
+    //   flex-direction: column-reverse !important;
+    // }
   }
 
   &-Button {
@@ -43,6 +43,6 @@
 
   &-TestButton {
     position: fixed !important;
-    bottom: 50px !important;
+    bottom: 0 !important;
   }
 }

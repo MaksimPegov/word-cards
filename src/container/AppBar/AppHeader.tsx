@@ -8,13 +8,19 @@ import './AppHeader.scss'
 const bem = cn('AppHeader')
 
 export const AppHeader: React.FC = () => {
+  const [openTooltip, setOpenTooltip] = React.useState(false)
+
   const cloudMessage =
     'Cloud synchronization is not available yet, all your data is stored locally!'
+
+  const togleTooltip = () => {
+    setOpenTooltip((old) => !old)
+  }
 
   return (
     <AppBar position="static" className={bem()}>
       <Toolbar>
-        <Dashboard sx={{ mr: 1 }} />
+        <Dashboard sx={{ mr: 1 }} className={bem('Logo')} />
 
         <Typography
           variant="h6"
@@ -27,6 +33,7 @@ export const AppHeader: React.FC = () => {
             color: 'inherit',
             textDecoration: 'none',
           }}
+          className={bem('Title')}
         >
           CARDS
         </Typography>
@@ -39,7 +46,17 @@ export const AppHeader: React.FC = () => {
           Collections
         </Button>
 
-        <Tooltip disableFocusListener title={cloudMessage}>
+        <Tooltip
+          title={cloudMessage}
+          PopperProps={{
+            disablePortal: true,
+          }}
+          onClose={togleTooltip}
+          open={openTooltip}
+          disableFocusListener
+          disableHoverListener
+          disableTouchListener
+        >
           <IconButton className={bem('CloudSync')}>
             <CloudOff fontSize="large" />
           </IconButton>

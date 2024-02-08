@@ -1,10 +1,11 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit'
 
 import { addCard, fetchCards, removeCard } from './card.actions'
 import { Card, mokedCards } from '../../models/Card'
 
 interface CardsState {
   cards: Card[]
+  isFlipped: boolean
   currentCardIndex: number
   loading: boolean
   error: string | null
@@ -12,6 +13,7 @@ interface CardsState {
 
 const initialState: CardsState = {
   cards: [],
+  isFlipped: false,
   currentCardIndex: 0,
   loading: false,
   error: null,
@@ -35,13 +37,26 @@ const cardsSlice = createSlice({
     },
 
     shuffleCards: (state) => {
-      const oldCards = state.cards
-      do {
-        for (let i = state.cards.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1))
-          ;[state.cards[i], state.cards[j]] = [state.cards[j], state.cards[i]]
-        }
-      } while (oldCards[state.currentCardIndex] !== state.cards[state.currentCardIndex])
+      // Remove the current card from the array
+      const remainingCards = state.cards.filter(
+        (card) => card !== state.cards[state.currentCardIndex],
+      )
+
+      // Shuffle the remaining cards
+      for (let i = remainingCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[remainingCards[i], remainingCards[j]] = [remainingCards[j], remainingCards[i]]
+      }
+
+      // Add the current card back in at a random position
+      const newPosition = Math.floor(Math.random() * (remainingCards.length + 1))
+      remainingCards.splice(newPosition, 0, state.cards[state.currentCardIndex])
+
+      state.cards = remainingCards
+    },
+
+    flipCards: (state) => {
+      state.isFlipped = !state.isFlipped
     },
 
     setTestCards: (state) => {
@@ -96,7 +111,13 @@ const cardsSlice = createSlice({
   },
 })
 
-export const { nextCard, previousCard, setCurrentCardIndex, shuffleCards, setTestCards } =
-  cardsSlice.actions
+export const {
+  nextCard,
+  previousCard,
+  setCurrentCardIndex,
+  shuffleCards,
+  setTestCards,
+  flipCards,
+} = cardsSlice.actions
 
 export default cardsSlice.reducer

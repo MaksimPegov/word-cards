@@ -8,9 +8,10 @@ const bem = cn('CardPice')
 
 export interface CardPiceProps {
   card: Card
+  isFlippedByDefault: boolean
 }
 
-export const CardPice: React.FC<CardPiceProps> = ({ card }) => {
+export const CardPice: React.FC<CardPiceProps> = ({ card, isFlippedByDefault }) => {
   const [isFlipped, setIsFlipped] = React.useState(false)
   const [displayCard, setDisplayCard] = React.useState<Card>(card)
 
@@ -19,9 +20,9 @@ export const CardPice: React.FC<CardPiceProps> = ({ card }) => {
   }
 
   useEffect(() => {
-    setIsFlipped(false)
+    setIsFlipped(isFlippedByDefault)
     setDisplayCard(card)
-  }, [card])
+  }, [card, isFlippedByDefault])
 
   return (
     <div className={bem({ Flipped: isFlipped })} onClick={handleFlip}>

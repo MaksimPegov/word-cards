@@ -10,3 +10,8 @@ export const selectCurrentCardIndex = createSelector(
   selectCardsSlice,
   (cards) => cards.currentCardIndex,
 )
+
+export const selectIsFlipped = createSelector(
+  selectCardsSlice,
+  (cards) => cards.isFlipped,
+)

@@ -11,15 +11,27 @@ import {
 import { cn } from '@bem-react/classname'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react'
-import { Add, Delete, NavigateBefore, NavigateNext, Shuffle } from '@mui/icons-material'
+import {
+  Add,
+  Delete,
+  NavigateBefore,
+  NavigateNext,
+  Shuffle,
+  ThreeSixty,
+} from '@mui/icons-material'
 
 import {
+  flipCards,
   nextCard,
   previousCard,
   setTestCards,
   shuffleCards,
 } from './state/cards/cards.reducer'
-import { selectCards, selectCurrentCardIndex } from './state/cards/cards.selectors'
+import {
+  selectCards,
+  selectCurrentCardIndex,
+  selectIsFlipped,
+} from './state/cards/cards.selectors'
 import { addCard, fetchCards, removeCard } from './state/cards/card.actions'
 import { AppDispatch } from './state/store'
 import { CreateCard } from './components/CreateCard/CreateCard'
@@ -39,6 +51,7 @@ export const App: React.FC = () => {
   const [createDialog, setCreateDialog] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState(false)
   const [shuffleDisabled, setShuffleDisabled] = useState(false)
+  const isFlipped = useSelector(selectIsFlipped)
 
   const nextCardHandler = () => {
     dispatch(nextCard())
@@ -71,6 +84,10 @@ export const App: React.FC = () => {
     setTimeout(() => {
       setShuffleDisabled(false)
     }, 1000)
+  }
+
+  const flipAllCardsHandler = () => {
+    dispatch(flipCards())
   }
 
   const setTestCardsHandler = () => {
@@ -106,7 +123,7 @@ export const App: React.FC = () => {
             {'No cards yet :('}
           </Typography>
         ) : (
-          <CardPice card={cards[currentCardIndex]} />
+          <CardPice card={cards[currentCardIndex]} isFlippedByDefault={isFlipped} />
         )}
 
         <IconButton
@@ -121,13 +138,23 @@ export const App: React.FC = () => {
 
       <div className={bem('Buttons')}>
         <Button
-          startIcon={<Delete />}
+          variant="contained"
+          startIcon={<Add />}
           size="large"
-          color="warning"
           className={bem('Button')}
-          onClick={togleDeleteDialog}
+          onClick={togleCreateDialog}
         >
-          Delete current
+          Add new
+        </Button>
+
+        <Button
+          variant="outlined"
+          size="large"
+          className={bem('Button')}
+          startIcon={<ThreeSixty />}
+          onClick={flipAllCardsHandler}
+        >
+          Flip all cards
         </Button>
 
         <Button
@@ -142,19 +169,15 @@ export const App: React.FC = () => {
         </Button>
 
         <Button
-          variant="contained"
-          endIcon={<Add />}
+          startIcon={<Delete />}
           size="large"
+          color="warning"
           className={bem('Button')}
-          onClick={togleCreateDialog}
+          onClick={togleDeleteDialog}
         >
-          Add new
+          Delete current
         </Button>
       </div>
-
-      <Button className={bem('TestButton')} onClick={setTestCardsHandler}>
-        {'Set test cards'}
-      </Button>
 
       <Dialog
         open={createDialog}
