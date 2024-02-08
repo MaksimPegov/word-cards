@@ -13,10 +13,12 @@
   }
 
   &-CardComponent {
+    justify-content: center;
     flex-direction: row;
     align-items: center;
     display: flex;
     margin: 50px 0;
+    width: -webkit-fill-available;
   }
 
   &-NavButton {
@@ -36,6 +38,10 @@
   &-Button {
     margin: 20px !important;
     width: 200px;
+
+    @media screen and (max-width: $screen-m-width) {
+      width: 400px !important;
+    }
   }
 
   &-TestButton {
