@@ -69,7 +69,7 @@ export const App: React.FC = () => {
     dispatch(shuffleCards())
     setTimeout(() => {
       setShuffleDisabled(false)
-    }, 100)
+    }, 1000)
   }
 
   const setTestCardsHandler = () => {
@@ -173,7 +173,7 @@ export const App: React.FC = () => {
 
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This action can not be undone, your cant get deleted card back.
+            This action can not be undone.
           </DialogContentText>
         </DialogContent>
 
