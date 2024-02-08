@@ -11,11 +11,16 @@ import {
 import { cn } from '@bem-react/classname'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react'
-import { Add, Delete, NavigateBefore, NavigateNext } from '@mui/icons-material'
+import { Add, Delete, NavigateBefore, NavigateNext, Shuffle } from '@mui/icons-material'
 
+import {
+  nextCard,
+  previousCard,
+  setTestCards,
+  shuffleCards,
+} from './state/cards/cards.reducer'
 import { selectCards, selectCurrentCardIndex } from './state/cards/cards.selectors'
 import { addCard, fetchCards, removeCard } from './state/cards/card.actions'
-import { nextCard, previousCard } from './state/cards/cards.reducer'
 import { AppDispatch } from './state/store'
 import { CreateCard } from './components/CreateCard/CreateCard'
 import { CardPice } from './components/CardPice/CardPice'
@@ -30,8 +35,9 @@ export const App: React.FC = () => {
   const cards = useSelector(selectCards)
 
   const currentCardIndex = useSelector(selectCurrentCardIndex)
-  const [createDialog, setcreateDialog] = useState(false)
+  const [createDialog, setCreateDialog] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState(false)
+  const [shuffleDisabled, setShuffleDisabled] = useState(false)
 
   const nextCardHandler = () => {
     dispatch(nextCard())
@@ -42,7 +48,7 @@ export const App: React.FC = () => {
   }
 
   const togleCreateDialog = () => {
-    setcreateDialog((old) => !old)
+    setCreateDialog((old) => !old)
   }
 
   const togleDeleteDialog = () => {
@@ -56,6 +62,18 @@ export const App: React.FC = () => {
   const deleteCurrentCard = () => {
     dispatch(removeCard(cards[currentCardIndex]))
     setDeleteConfirm(false)
+  }
+
+  const shuffleCardsHandler = () => {
+    setShuffleDisabled(true)
+    dispatch(shuffleCards())
+    setTimeout(() => {
+      setShuffleDisabled(false)
+    }, 100)
+  }
+
+  const setTestCardsHandler = () => {
+    dispatch(setTestCards())
   }
 
   useEffect(() => {
@@ -100,13 +118,24 @@ export const App: React.FC = () => {
 
       <div className={bem('Buttons')}>
         <Button
-          variant="outlined"
           startIcon={<Delete />}
           size="large"
+          color="warning"
           className={bem('Button')}
           onClick={togleDeleteDialog}
         >
           Delete current
+        </Button>
+
+        <Button
+          startIcon={<Shuffle />}
+          size="large"
+          variant="outlined"
+          className={'Button'}
+          onClick={shuffleCardsHandler}
+          disabled={shuffleDisabled}
+        >
+          shuffle
         </Button>
 
         <Button
@@ -120,9 +149,13 @@ export const App: React.FC = () => {
         </Button>
       </div>
 
+      <Button className={bem('TestButton')} onClick={setTestCardsHandler}>
+        {'Set test cards'}
+      </Button>
+
       <Dialog
         open={createDialog}
-        onClose={() => setcreateDialog(false)}
+        onClose={togleDeleteDialog}
         className={bem('CreateDialog')}
       >
         <CreateCard createCard={createCard} closeDialog={togleCreateDialog} />

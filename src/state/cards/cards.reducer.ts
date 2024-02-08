@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { addCard, fetchCards, removeCard } from './card.actions'
-import { Card } from '../../models/Card'
+import { Card, mokedCards } from '../../models/Card'
 
 interface CardsState {
   cards: Card[]
@@ -24,12 +24,29 @@ const cardsSlice = createSlice({
     setCurrentCardIndex: (state, action: PayloadAction<number>) => {
       state.currentCardIndex = action.payload
     },
+
     nextCard: (state) => {
       state.currentCardIndex = (state.currentCardIndex + 1) % state.cards.length
     },
+
     previousCard: (state) => {
       state.currentCardIndex =
         (state.currentCardIndex - 1 + state.cards.length) % state.cards.length
+    },
+
+    shuffleCards: (state) => {
+      const oldCards = state.cards
+      do {
+        for (let i = state.cards.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[state.cards[i], state.cards[j]] = [state.cards[j], state.cards[i]]
+        }
+      } while (oldCards[state.currentCardIndex] !== state.cards[state.currentCardIndex])
+    },
+
+    setTestCards: (state) => {
+      state.cards = mokedCards
+      localStorage.setItem('cards', JSON.stringify(mokedCards))
     },
   },
   extraReducers: (builder) => {
@@ -79,6 +96,7 @@ const cardsSlice = createSlice({
   },
 })
 
-export const { nextCard, previousCard, setCurrentCardIndex } = cardsSlice.actions
+export const { nextCard, previousCard, setCurrentCardIndex, shuffleCards, setTestCards } =
+  cardsSlice.actions
 
 export default cardsSlice.reducer

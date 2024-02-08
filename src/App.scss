@@ -22,4 +22,10 @@
   &-Button {
     margin: 0 20px !important;
   }
+
+  &-TestButton {
+    position: fixed !important;
+    margin: 20px !important;
+    bottom: 0 !important;
+  }
 }
