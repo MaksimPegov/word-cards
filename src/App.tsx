@@ -27,6 +27,7 @@ import { CardPice } from './components/CardPice/CardPice'
 import { Card } from './models/Card'
 
 import './App.scss'
+import { AppHeader } from './container/AppBar/AppHeader'
 
 const bem = cn('App')
 
@@ -82,6 +83,8 @@ export const App: React.FC = () => {
 
   return (
     <div className={bem()}>
+      <AppHeader />
+
       <div className={bem('CardComponent')}>
         <IconButton
           aria-label="priveous"
