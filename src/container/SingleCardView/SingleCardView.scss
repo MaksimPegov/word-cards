@@ -1,0 +1,40 @@
+@import '../../styles/styles.scss';
+
+.SingleCardView {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  width: -webkit-fill-available;
+
+  &-CardComponent {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    margin: 50px 0;
+    width: -webkit-fill-available;
+
+    @media screen and (max-width: $screen-m-width) {
+      zoom: 0.7;
+    }
+  }
+
+  &-NavButton {
+    border-radius: 10px !important;
+  }
+
+  &-Buttons {
+    flex-direction: column;
+    display: flex;
+    width: fit-content;
+  }
+
+  &-Button {
+    margin: 20px !important;
+    width: 200px;
+
+    @media screen and (max-width: $screen-m-width) {
+      width: 300px !important;
+    }
+  }
+}

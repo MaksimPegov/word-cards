@@ -57,7 +57,7 @@ export const AppHeader: React.FC = () => {
           disableHoverListener
           disableTouchListener
         >
-          <IconButton className={bem('CloudSync')}>
+          <IconButton className={bem('CloudSync')} onClick={togleTooltip}>
             <CloudOff fontSize="large" />
           </IconButton>
         </Tooltip>
