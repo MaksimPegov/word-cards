@@ -33,7 +33,7 @@ import {
 } from '../../state/cards/cards.selectors'
 import { AppDispatch } from '../../state/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCard, fetchCards, removeCard } from '../../state/cards/card.actions'
+import { addCard, fetchCards, removeCard } from '../../state/cards/card.thunks'
 import { CreateCard } from '../../components/CreateCard/CreateCard'
 import { CardPice } from '../../components/CardPice/CardPice'
 import { Card } from '../../models/Card'
@@ -101,7 +101,7 @@ export const SingleCardView: React.FC = () => {
           aria-label="priveous"
           size="large"
           className={bem('NavButton')}
-          onClick={nextCardHandler}
+          onClick={previouseCardHandler}
         >
           <NavigateBefore fontSize="inherit" />
         </IconButton>
@@ -124,7 +124,7 @@ export const SingleCardView: React.FC = () => {
           aria-label="Next"
           size="large"
           className={bem('NavButton')}
-          onClick={previouseCardHandler}
+          onClick={nextCardHandler}
         >
           <NavigateNext fontSize="inherit" />
         </IconButton>

@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice, current } from '@reduxjs/toolkit'
 
-import { addCard, fetchCards, removeCard } from './card.actions'
+import { addCard, fetchCards, removeCard } from './card.thunks'
 import { Card, mokedCards } from '../../models/Card'
 
-interface CardsState {
+type CardsState = {
   cards: Card[]
   isFlipped: boolean
   currentCardIndex: number

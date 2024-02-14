@@ -7,7 +7,7 @@ import './CreateCard.scss'
 
 const bem = cn('CreateCard')
 
-interface CreateCardProps {
+type CreateCardProps = {
   createCard: (card: Card) => void
   closeDialog: () => void
 }

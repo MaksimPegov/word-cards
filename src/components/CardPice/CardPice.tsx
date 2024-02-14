@@ -6,7 +6,7 @@ import './CardPice.scss'
 
 const bem = cn('CardPice')
 
-export interface CardPiceProps {
+export type CardPiceProps = {
   card: Card
   isFlippedByDefault: boolean
 }
