@@ -23,7 +23,6 @@ import {
   flipCards,
   nextCard,
   previousCard,
-  setTestCards,
   shuffleCards,
 } from '../../state/cards/cards.reducer'
 import {
@@ -40,6 +39,7 @@ import { Card } from '../../models/Card'
 import { cn } from '@bem-react/classname'
 
 import './SingleCardView.scss'
+import { selectCurrentCollectionId } from '../../state/collections/collections.selector'
 
 const bem = cn('SingleCardView')
 
@@ -48,6 +48,7 @@ export const SingleCardView: React.FC = () => {
   const cards = useSelector(selectCards)
 
   const currentCardIndex = useSelector(selectCurrentCardIndex)
+  const currentCollectionIndex = useSelector(selectCurrentCollectionId)
   const [createDialog, setCreateDialog] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState(false)
   const [shuffleDisabled, setShuffleDisabled] = useState(false)
@@ -70,7 +71,7 @@ export const SingleCardView: React.FC = () => {
   }
 
   const createCard = (card: Card) => {
-    dispatch(addCard(card))
+    dispatch(addCard({ card: card, collectionId: currentCollectionIndex as number }))
   }
 
   const deleteCurrentCard = () => {
@@ -91,8 +92,8 @@ export const SingleCardView: React.FC = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchCards())
-  }, [dispatch])
+    dispatch(fetchCards(currentCollectionIndex as number))
+  }, [dispatch, currentCollectionIndex])
 
   return (
     <div className={bem()}>

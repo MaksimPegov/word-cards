@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { Card } from '../../models/Card'
 
-const fetchCards = createAsyncThunk('cards/fetchCards', async () => {
-  const storage = localStorage.getItem('cards')
+const fetchCards = createAsyncThunk('cards/fetchCards', async (collectionId: number) => {
+  const storage = localStorage.getItem(collectionId.toString())
 
   if (storage) {
     return JSON.parse(storage)
@@ -11,23 +11,29 @@ const fetchCards = createAsyncThunk('cards/fetchCards', async () => {
   return []
 })
 
-const addCard = createAsyncThunk('cards/addCard', async (card: Card) => {
-  const storage = localStorage.getItem('cards')
+const addCard = createAsyncThunk(
+  'cards/addCard',
+  async (addCardRequest: { card: Card; collectionId: number }) => {
+    const storage = localStorage.getItem(addCardRequest.collectionId.toString())
 
-  if (storage) {
-    const cards = JSON.parse(storage)
-    cards.push(card)
-    localStorage.setItem('cards', JSON.stringify(cards))
-    return cards
-  } else {
-    localStorage.setItem('cards', JSON.stringify([card]))
-    return [card]
-  }
-})
+    if (storage) {
+      const cards = JSON.parse(storage)
+      cards.push(addCardRequest.card)
+      localStorage.setItem(addCardRequest.collectionId.toString(), JSON.stringify(cards))
+      return cards
+    } else {
+      localStorage.setItem(
+        addCardRequest.collectionId.toString(),
+        JSON.stringify([addCardRequest.card]),
+      )
+      return [addCardRequest.card]
+    }
+  },
+)
 
 const removeCard = createAsyncThunk('cards/removeCard', async (card: Card) => {
   const storage = localStorage.getItem('cards')
-  
+
   if (storage) {
     const cards = JSON.parse(storage)
     const newCards = cards.filter(
