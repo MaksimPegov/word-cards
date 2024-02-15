@@ -8,12 +8,36 @@
     height: 100vh;
   }
 
-  &-CollectionsDiv {
+  &-Collections {
     width: 40%;
+
+    @media screen and (max-width: $screen-xl-width) {
+      width: 100%;
+      display: none;
+
+      &_fullScreen {
+        display: unset;
+      }
+    }
   }
 
-  &-CardsDiv {
+  &-Divider {
+    @media screen and (max-width: $screen-xl-width) {
+      display: none;
+    }
+  }
+
+  &-Cards {
     width: 60%;
+
+    @media screen and (max-width: $screen-xl-width) {
+      width: 100%;
+      display: none;
+
+      &_fullScreen {
+        display: unset;
+      }
+    }
   }
 
   &-SelectCollectionAlert {

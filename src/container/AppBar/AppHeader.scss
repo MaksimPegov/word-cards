@@ -15,7 +15,7 @@
     display: none !important;
 
     &_Collections {
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: $screen-xl-width) {
         display: block !important;
       }
     }

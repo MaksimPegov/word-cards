@@ -7,21 +7,23 @@ import { Divider, Typography } from '@mui/material'
 
 import { selectCurrentCollectionId } from './state/collections/collections.selector'
 import { useSelector } from 'react-redux'
+
 import './App.scss'
 
 const bem = cn('App')
 
 export const App: React.FC = () => {
-  const isCollectionSelected = useSelector(selectCurrentCollectionId)
+  const isCollectionSelected = Boolean(useSelector(selectCurrentCollectionId))
+
   return (
     <div className={bem()}>
       <AppHeader />
       <div className={bem('Main')}>
-        <div className={bem('CollectionsDiv')}>
+        <div className={bem('Collections', { fullScreen: !isCollectionSelected })}>
           <CollectionsList />
         </div>
-        <Divider orientation="vertical" />
-        <div className={bem('CardsDiv')}>
+        <Divider orientation="vertical" className={bem('Divider')} />
+        <div className={bem('Cards', { fullScreen: isCollectionSelected })}>
           {isCollectionSelected ? (
             <SingleCardView />
           ) : (

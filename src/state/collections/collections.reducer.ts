@@ -24,6 +24,10 @@ const collectionsSlice = createSlice({
     setCurrentCollection(state, action: PayloadAction<number>) {
       state.selectedCollectionId = action.payload
     },
+
+    unselectCollection(state) {
+      state.selectedCollectionId = null
+    },
   },
   extraReducers: (builder) => {
     // fetchCollections reducers
@@ -71,6 +75,6 @@ const collectionsSlice = createSlice({
   },
 })
 
-export const { setCurrentCollection } = collectionsSlice.actions
+export const { setCurrentCollection, unselectCollection } = collectionsSlice.actions
 
 export default collectionsSlice.reducer

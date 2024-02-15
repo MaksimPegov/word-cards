@@ -1,4 +1,4 @@
-import { Button, Divider, TextField } from '@mui/material'
+import { Button, Divider, TextField, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { cn } from '@bem-react/classname'
@@ -30,6 +30,7 @@ export const CollectionsList: React.FC = () => {
 
   const addCollectionHandler = () => {
     dispatch(addCollection({ id: Date.now(), name: newCollectionName }))
+    setNewCollectionName('')
   }
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,18 +43,31 @@ export const CollectionsList: React.FC = () => {
 
   return (
     <div className={bem()}>
-      {collections.map((collection: Collection) => {
-        return (
-          <Button
-            key={collection.id}
-            className={bem('Collection')}
-            onClick={() => selectCollectionHandler(collection.id)}
-            variant="outlined"
-          >
-            {collection.name}
-          </Button>
-        )
-      })}
+      {collections.length === 0 ? (
+        <Typography
+          variant="overline"
+          display="block"
+          gutterBottom
+          fontSize={13}
+          margin={5}
+          className={bem('SelectCollectionAlert')}
+        >
+          Create your first collection
+        </Typography>
+      ) : (
+        collections.map((collection: Collection) => {
+          return (
+            <Button
+              key={collection.id}
+              className={bem('Collection')}
+              onClick={() => selectCollectionHandler(collection.id)}
+              variant="outlined"
+            >
+              {collection.name}
+            </Button>
+          )
+        })
+      )}
       <Divider orientation="horizontal" />
       <div className={bem('CreateCollection')}>
         <TextField onChange={inputChange} autoComplete="off" />

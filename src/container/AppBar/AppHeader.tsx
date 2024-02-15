@@ -4,17 +4,27 @@ import { CloudOff, Dashboard } from '@mui/icons-material'
 import { AppBar, Button, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
 
 import './AppHeader.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { unselectCollection } from '../../state/collections/collections.reducer'
+import { selectCurrentCollectionId } from '../../state/collections/collections.selector'
 
 const bem = cn('AppHeader')
 
 export const AppHeader: React.FC = () => {
   const [openTooltip, setOpenTooltip] = React.useState(false)
+  const isCollectionSelected = Boolean(useSelector(selectCurrentCollectionId))
+
+  const dispatch = useDispatch()
 
   const cloudMessage =
     'Cloud synchronization is not available yet, all your data is stored locally!'
 
   const togleTooltip = () => {
     setOpenTooltip((old) => !old)
+  }
+
+  const collectionsButtonHandler = () => {
+    dispatch(unselectCollection())
   }
 
   return (
@@ -38,13 +48,16 @@ export const AppHeader: React.FC = () => {
           CARDS
         </Typography>
 
-        <Button
-          color="inherit"
-          className={bem('Button', { Collections: true })}
-          variant="outlined"
-        >
-          Collections
-        </Button>
+        {isCollectionSelected ? (
+          <Button
+            color="inherit"
+            className={bem('Button', { Collections: true })}
+            variant="outlined"
+            onClick={collectionsButtonHandler}
+          >
+            Collections
+          </Button>
+        ) : null}
 
         <Tooltip
           title={cloudMessage}
