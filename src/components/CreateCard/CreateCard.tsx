@@ -53,7 +53,12 @@ export const CreateCard: React.FC<CreateCardProps> = ({ createCard, closeDialog 
           cancel
         </Button>
 
-        <Button variant="text" onClick={handleCreateCard} className={bem('Button')}>
+        <Button
+          variant="text"
+          onClick={handleCreateCard}
+          className={bem('Button')}
+          disabled={word.trim().length === 0 || translation.trim().length === 0}
+        >
           create
         </Button>
       </div>

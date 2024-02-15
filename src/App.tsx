@@ -35,7 +35,7 @@ export const App: React.FC = () => {
               margin={5}
               className={bem('SelectCollectionAlert')}
             >
-              Select a collection to start
+              Select collection to start!
             </Typography>
           )}
         </div>

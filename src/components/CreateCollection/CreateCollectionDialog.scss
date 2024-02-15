@@ -1,0 +1,17 @@
+@import '/src/styles/styles.scss';
+
+.CreateCollectionDialog {
+  flex-direction: column;
+  min-width: 350px;
+  display: flex;
+  margin: 30px;
+  width: auto;
+
+  @media screen and (max-width: $screen-s-width) {
+    min-width: 0px;
+  }
+
+  &-Button {
+    margin-top: 30px !important;
+  }
+}

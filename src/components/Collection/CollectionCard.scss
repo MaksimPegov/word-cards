@@ -1,0 +1,22 @@
+.CollectionCard {
+  width: 80%;
+  margin: 10px 0 !important;
+  display: flex;
+  border: solid 1px #bcbcbc;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #b4dbff3f;
+  }
+
+  &-CollectionName {
+    margin: auto 10px !important;
+  }
+
+  &-Delete {
+    margin: auto 10px auto auto !important;
+  }
+}

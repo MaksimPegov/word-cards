@@ -1,40 +1,48 @@
-import { Button, Divider, TextField, Typography } from '@mui/material'
+import { Button, Dialog, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { cn } from '@bem-react/classname'
 
 import { setCurrentCollection } from '../../state/collections/collections.reducer'
-import { selectCollections } from '../../state/collections/collections.selector'
+import {
+  selectCollections,
+  selectCurrentCollectionId,
+} from '../../state/collections/collections.selector'
 import { AppDispatch } from '../../state/store'
 import { Collection } from '../../models/Collection'
 import {
   addCollection,
   fetchCollections,
+  removeCollection,
 } from '../../state/collections/collections.thunks'
 
 import './CollectionsList.scss'
+import { CollectionCard } from '../../components/Collection/CollectionCard'
+import { CreateCollectionDialog } from '../../components/CreateCollection/CreateCollectionDialog'
 
 const bem = cn('Collections')
 
 export const CollectionsList: React.FC = () => {
-  const collections = useSelector(selectCollections)
-
-  const [newCollectionName, setNewCollectionName] = React.useState('')
-  const isButtonDisabled = newCollectionName === ''
-
   const dispatch = useDispatch<AppDispatch>()
+  const collections = useSelector(selectCollections)
+  const currentCollectionId = useSelector(selectCurrentCollectionId)
+
+  const [createDialog, setCreateDialog] = React.useState(false)
+
+  const togleCreateDialog = () => {
+    setCreateDialog((old) => !old)
+  }
 
   const selectCollectionHandler = (id: number) => {
     dispatch(setCurrentCollection(id))
   }
 
-  const addCollectionHandler = () => {
-    dispatch(addCollection({ id: Date.now(), name: newCollectionName }))
-    setNewCollectionName('')
+  const createCollectionHandler = (name: string) => {
+    dispatch(addCollection({ id: Date.now(), name: name }))
   }
 
-  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewCollectionName(e.target.value)
+  const deleteCollectionHandler = (id: number) => {
+    dispatch(removeCollection(id))
   }
 
   useEffect(() => {
@@ -43,42 +51,63 @@ export const CollectionsList: React.FC = () => {
 
   return (
     <div className={bem()}>
+      <Typography
+        variant="overline"
+        display="block"
+        gutterBottom
+        fontSize={15}
+        margin={5}
+        className={bem('Header')}
+      >
+        Your collections:
+      </Typography>
+
       {collections.length === 0 ? (
         <Typography
           variant="overline"
           display="block"
           gutterBottom
-          fontSize={13}
+          fontSize={10}
           margin={5}
           className={bem('SelectCollectionAlert')}
         >
-          Create your first collection
+          {`No collections yet :(`}
         </Typography>
       ) : (
         collections.map((collection: Collection) => {
           return (
-            <Button
+            <CollectionCard
+              collection={collection}
               key={collection.id}
-              className={bem('Collection')}
-              onClick={() => selectCollectionHandler(collection.id)}
-              variant="outlined"
-            >
-              {collection.name}
-            </Button>
+              currentCollection={collection.id === currentCollectionId}
+              clickHandler={selectCollectionHandler}
+              onDelete={deleteCollectionHandler}
+            />
           )
         })
       )}
-      <Divider orientation="horizontal" />
+
       <div className={bem('CreateCollection')}>
-        <TextField onChange={inputChange} autoComplete="off" />
+        {/* <TextField value={newCollectionName} onChange={inputChange} autoComplete="off" /> */}
         <Button
-          className={bem('AddCollection')}
-          onClick={addCollectionHandler}
-          disabled={isButtonDisabled}
+          className={bem('CreteButton')}
+          onClick={togleCreateDialog}
+          variant="contained"
         >
-          Add Collection
+          Create collection
         </Button>
       </div>
+
+      <Dialog
+        open={createDialog}
+        onClose={togleCreateDialog}
+        className={bem('CreateDialog')}
+      >
+        <CreateCollectionDialog
+          createCollection={createCollectionHandler}
+          closeDialog={togleCreateDialog}
+        />
+      </Dialog>
     </div>
   )
 }

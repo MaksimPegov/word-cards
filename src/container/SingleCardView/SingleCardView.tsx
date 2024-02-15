@@ -176,7 +176,7 @@ export const SingleCardView: React.FC = () => {
 
       <Dialog
         open={createDialog}
-        onClose={togleDeleteDialog}
+        onClose={togleCreateDialog}
         className={bem('CreateDialog')}
       >
         <CreateCard createCard={createCard} closeDialog={togleCreateDialog} />

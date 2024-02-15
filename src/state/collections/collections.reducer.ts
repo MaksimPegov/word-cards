@@ -67,6 +67,9 @@ const collectionsSlice = createSlice({
     })
     builder.addCase(removeCollection.fulfilled, (state) => {
       state.loading = false
+      if (!state.collections[state.selectedCollectionId as number]) {
+        state.selectedCollectionId = null
+      }
     })
     builder.addCase(removeCollection.rejected, (state, action) => {
       state.loading = false
