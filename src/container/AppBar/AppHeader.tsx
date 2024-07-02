@@ -7,6 +7,8 @@ import './AppHeader.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { unselectCollection } from '../../state/collections/collections.reducer'
 import { selectCurrentCollectionId } from '../../state/collections/collections.selector'
+import { login, mockCredentials } from '../../state/user/users.thunks'
+import { AppDispatch } from '../../state/store'
 
 const bem = cn('AppHeader')
 
@@ -14,13 +16,14 @@ export const AppHeader: React.FC = () => {
   const [openTooltip, setOpenTooltip] = React.useState(false)
   const isCollectionSelected = Boolean(useSelector(selectCurrentCollectionId))
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const cloudMessage =
     'Cloud synchronization is not available yet, all your data is stored locally!'
 
   const togleTooltip = () => {
     setOpenTooltip((old) => !old)
+    dispatch(login(mockCredentials))
   }
 
   const collectionsButtonHandler = () => {
