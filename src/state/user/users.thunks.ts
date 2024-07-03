@@ -13,6 +13,7 @@ export const mockCredentials: LoginDTO = {
 const login = createAsyncThunk(
   'user/login',
   async (credentials: LoginDTO, { rejectWithValue }) => {
+    console.log('credentials', credentials)
     try {
       const response = await fetch('http://localhost:9001/api/users/login', {
         method: 'POST',
@@ -22,21 +23,17 @@ const login = createAsyncThunk(
         body: JSON.stringify(mockCredentials),
       })
 
-      if (response.ok) {
-        return await response.json()
+      // First, check the response status
+      if (!response.ok) {
+        const error = await response.json().then((json) => json.message)
+        return rejectWithValue(error)
       }
 
-      if (response.status === 401 || response.status === 404) {
-        return rejectWithValue('Invalid credentials')
-      }
+      // Then, parse the JSON body
+      const data = await response.json().then((json) => json.token)
 
-      if (response.status >= 500) {
-        return rejectWithValue('Server error')
-      }
-
-      if (response.status >= 400 && response.status < 500) {
-        return rejectWithValue('Invalid request')
-      }
+      // Assuming the happy path returns the data
+      return data
     } catch (error) {
       return rejectWithValue('An unexpected error occurred')
     }
