@@ -1,8 +1,8 @@
 import { cn } from '@bem-react/classname'
 import React, { useEffect } from 'react'
 
-import { Card } from '../../models/Card'
-import './CardPice.scss'
+import { Card } from 'models/Card'
+import 'components/CardPice/CardPice.scss'
 
 const bem = cn('CardPice')
 

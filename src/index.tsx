@@ -1,11 +1,11 @@
-import reportWebVitals from './reportWebVitals'
+import reportWebVitals from 'reportWebVitals'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-
-import { store } from './state/store'
-import './index.css'
-import { App } from './App'
 import { StrictMode } from 'react'
+
+import { store } from 'state/store'
+import { App } from 'App'
+import 'index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

@@ -1,14 +1,13 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import { AppHeader } from './container/AppBar/AppHeader'
-import { SingleCardView } from './container/SingleCardView/SingleCardView'
-import { CollectionsList } from './container/Collections/CollectionsList'
+import { AppHeader } from 'container/AppBar/AppHeader'
+import { SingleCardView } from 'container/SingleCardView/SingleCardView'
+import { CollectionsList } from 'container/Collections/CollectionsList'
 import { Divider, Typography } from '@mui/material'
-
-import { selectCurrentCollectionId } from './state/collections/collections.selector'
 import { useSelector } from 'react-redux'
 
-import './App.scss'
+import { selectCurrentCollectionId } from 'state/collections/collections.selector'
+import 'App.scss'
 
 const bem = cn('App')
 

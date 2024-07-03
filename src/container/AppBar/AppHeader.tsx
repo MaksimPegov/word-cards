@@ -2,13 +2,13 @@ import React from 'react'
 import { cn } from '@bem-react/classname'
 import { CloudOff, Dashboard } from '@mui/icons-material'
 import { AppBar, Button, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
-
-import './AppHeader.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { unselectCollection } from '../../state/collections/collections.reducer'
-import { selectCurrentCollectionId } from '../../state/collections/collections.selector'
-import { login, mockCredentials } from '../../state/user/users.thunks'
-import { AppDispatch } from '../../state/store'
+
+import { selectCurrentCollectionId } from 'state/collections/collections.selector'
+import { login, mockCredentials } from 'state/user/users.thunks'
+import { unselectCollection } from 'state/collections/collections.reducer'
+import { AppDispatch } from 'state/store'
+import 'container/AppBar/AppHeader.scss'
 
 const bem = cn('AppHeader')
 

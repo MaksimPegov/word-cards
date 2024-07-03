@@ -1,7 +1,3 @@
-import { cn } from '@bem-react/classname'
-import React from 'react'
-
-import { Collection } from '../../models/Collection'
 import {
   Button,
   Dialog,
@@ -12,9 +8,12 @@ import {
   IconButton,
   Typography,
 } from '@mui/material'
-
-import './CollectionCard.scss'
+import React from 'react'
+import { cn } from '@bem-react/classname'
+import { Collection } from 'models/Collection'
 import { DeleteOutline } from '@mui/icons-material'
+
+import 'components/Collection/CollectionCard.scss'
 
 const bem = cn('CollectionCard')
 

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { login } from './users.thunks'
+import { login } from 'state/user/users.thunks'
 
 type UserState = {
   username: string | null

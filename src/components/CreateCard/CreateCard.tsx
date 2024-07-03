@@ -2,8 +2,8 @@ import React from 'react'
 import { cn } from '@bem-react/classname'
 import { Button, TextField } from '@mui/material'
 
-import { Card } from '../../models/Card'
-import './CreateCard.scss'
+import { Card } from 'models/Card'
+import 'components/CreateCard/CreateCard.scss'
 
 const bem = cn('CreateCard')
 

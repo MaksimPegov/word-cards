@@ -2,7 +2,7 @@ import React from 'react'
 import { cn } from '@bem-react/classname'
 import { Button, TextField } from '@mui/material'
 
-import './CreateCollectionDialog.scss'
+import 'components/CreateCollection/CreateCollectionDialog.scss'
 
 const bem = cn('CreateCollectionDialog')
 

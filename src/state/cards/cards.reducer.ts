@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { addCard, fetchCards, removeCard } from './card.thunks'
-import { Card, mokedCards } from '../../models/Card'
+import { addCard, fetchCards, removeCard } from 'state/cards/card.thunks'
+import { Card, mokedCards } from 'models/Card'
 
 type CardsState = {
   cards: Card[]

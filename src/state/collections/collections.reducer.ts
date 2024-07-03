@@ -1,7 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { addCollection, fetchCollections, removeCollection } from './collections.thunks'
-import { Collection } from '../../models/Collection'
+import {
+  addCollection,
+  fetchCollections,
+  removeCollection,
+} from 'state/collections/collections.thunks'
+import { Collection } from 'models/Collection'
 
 type CollectionsState = {
   collections: Collection[]
