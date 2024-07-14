@@ -5,6 +5,7 @@ import { UserProfile } from 'container/UserProfile/UserProfile'
 import { AppHeader } from 'container/AppBar/AppHeader'
 import { LoginPage } from 'container/LoginPage/LoginPage'
 import { App } from 'App'
+import { RegistrationPage } from 'container/RegistrationPage/RegistrationPage'
 
 export const Router = () => {
   const location = useLocation()
@@ -16,6 +17,10 @@ export const Router = () => {
         {/* <Route path="/main" element={<AuthGuard comp={<App />} />} /> */}
         <Route path="/main" element={<App />} />
         <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
+        <Route
+          path="/registration"
+          element={<UnAuthGuard comp={<RegistrationPage />} />}
+        />
         <Route path="/profile" element={<AuthGuard comp={<UserProfile />} />} />
         <Route path="/*" element={<Navigate to="/main" />} />
       </Routes>

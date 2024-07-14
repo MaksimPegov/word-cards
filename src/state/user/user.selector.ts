@@ -17,3 +17,18 @@ export const inProgressSelector = createSelector(
   selectUserSlice,
   (userState) => userState.loginProcessing,
 )
+
+export const registrationInProgressSelector = createSelector(
+  selectUserSlice,
+  (userState) => userState.registrationProcessing,
+)
+
+export const registrationErrorSelector = createSelector(
+  selectUserSlice,
+  (userState) => userState.registrationError,
+)
+
+export const registrationSuccessSelector = createSelector(
+  selectUserSlice,
+  (userState) => userState.registrationSuccess,
+)
