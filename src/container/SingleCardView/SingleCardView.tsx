@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { cn } from '@bem-react/classname'
 import {
   Button,
   Dialog,
@@ -24,22 +25,20 @@ import {
   nextCard,
   previousCard,
   shuffleCards,
-} from '../../state/cards/cards.reducer'
+} from 'state/cards/cards.reducer'
 import {
   selectCards,
   selectCurrentCardIndex,
   selectIsFlipped,
-} from '../../state/cards/cards.selectors'
-import { AppDispatch } from '../../state/store'
-import { useDispatch, useSelector } from 'react-redux'
-import { addCard, fetchCards, removeCard } from '../../state/cards/card.thunks'
-import { CreateCard } from '../../components/CreateCard/CreateCard'
-import { CardPice } from '../../components/CardPice/CardPice'
-import { Card } from '../../models/Card'
-import { cn } from '@bem-react/classname'
+} from 'state/cards/cards.selectors'
+import { addCard, fetchCards, removeCard } from 'state/cards/card.thunks'
+import { AppDispatch } from 'state/store'
+import { CreateCard } from 'components/CreateCard/CreateCard'
+import { CardPice } from 'components/CardPice/CardPice'
+import { Card } from 'models/Card'
 
-import './SingleCardView.scss'
-import { selectCurrentCollectionId } from '../../state/collections/collections.selector'
+import 'container/SingleCardView/SingleCardView.scss'
+import { selectCurrentCollectionId } from 'state/collections/collections.selector'
 
 const bem = cn('SingleCardView')
 

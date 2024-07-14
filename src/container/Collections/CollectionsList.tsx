@@ -3,22 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { cn } from '@bem-react/classname'
 
-import { setCurrentCollection } from '../../state/collections/collections.reducer'
 import {
   selectCollections,
   selectCurrentCollectionId,
-} from '../../state/collections/collections.selector'
-import { AppDispatch } from '../../state/store'
-import { Collection } from '../../models/Collection'
+} from 'state/collections/collections.selector'
 import {
   addCollection,
   fetchCollections,
   removeCollection,
-} from '../../state/collections/collections.thunks'
-
-import './CollectionsList.scss'
-import { CollectionCard } from '../../components/Collection/CollectionCard'
-import { CreateCollectionDialog } from '../../components/CreateCollection/CreateCollectionDialog'
+} from 'state/collections/collections.thunks'
+import { Collection } from 'models/Collection'
+import { AppDispatch } from 'state/store'
+import { setCurrentCollection } from 'state/collections/collections.reducer'
+import { CreateCollectionDialog } from 'components/CreateCollection/CreateCollectionDialog'
+import { CollectionCard } from 'components/Collection/CollectionCard'
+import 'container/Collections/CollectionsList.scss'
 
 const bem = cn('Collections')
 

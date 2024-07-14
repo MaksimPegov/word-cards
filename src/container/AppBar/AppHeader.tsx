@@ -1,26 +1,29 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import { CloudOff, Dashboard } from '@mui/icons-material'
+import { AccountBox, Dashboard } from '@mui/icons-material'
 import { AppBar, Button, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
-
-import './AppHeader.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { unselectCollection } from '../../state/collections/collections.reducer'
-import { selectCurrentCollectionId } from '../../state/collections/collections.selector'
+import { useNavigate } from 'react-router-dom'
+
+import { selectCurrentCollectionId } from 'state/collections/collections.selector'
+import { unselectCollection } from 'state/collections/collections.reducer'
+import { AppDispatch } from 'state/store'
+import 'container/AppBar/AppHeader.scss'
 
 const bem = cn('AppHeader')
 
 export const AppHeader: React.FC = () => {
-  const [openTooltip, setOpenTooltip] = React.useState(false)
   const isCollectionSelected = Boolean(useSelector(selectCurrentCollectionId))
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
 
-  const cloudMessage =
-    'Cloud synchronization is not available yet, all your data is stored locally!'
+  const logoClickHandler = () => {
+    navigate('/main')
+  }
 
   const togleTooltip = () => {
-    setOpenTooltip((old) => !old)
+    navigate('/profile')
   }
 
   const collectionsButtonHandler = () => {
@@ -30,23 +33,25 @@ export const AppHeader: React.FC = () => {
   return (
     <AppBar position="static" className={bem()}>
       <Toolbar>
-        <Dashboard sx={{ mr: 1 }} className={bem('Logo')} />
+        <div className={bem('Logo')} onClick={logoClickHandler}>
+          <Dashboard sx={{ mr: 1 }} className={bem('Logo')} />
 
-        <Typography
-          variant="h6"
-          noWrap
-          sx={{
-            mr: 4,
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-          className={bem('Title')}
-        >
-          CARDS
-        </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{
+              mr: 4,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+            className={bem('Title')}
+          >
+            CARDS
+          </Typography>
+        </div>
 
         {isCollectionSelected ? (
           <Button
@@ -59,19 +64,9 @@ export const AppHeader: React.FC = () => {
           </Button>
         ) : null}
 
-        <Tooltip
-          title={cloudMessage}
-          PopperProps={{
-            disablePortal: true,
-          }}
-          onClose={togleTooltip}
-          open={openTooltip}
-          disableFocusListener
-          disableHoverListener
-          disableTouchListener
-        >
+        <Tooltip title="Your profile" arrow>
           <IconButton className={bem('CloudSync')} onClick={togleTooltip}>
-            <CloudOff fontSize="large" />
+            <AccountBox fontSize="large" />
           </IconButton>
         </Tooltip>
       </Toolbar>

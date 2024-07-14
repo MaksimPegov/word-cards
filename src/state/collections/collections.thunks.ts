@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { Collection } from '../../models/Collection'
+import { Collection } from 'models/Collection'
 
 const fetchCollections = createAsyncThunk('collections/fetchCollections', async () => {
   const storage = localStorage.getItem('collections')
