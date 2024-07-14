@@ -55,9 +55,9 @@ const UserSlice = createSlice({
     })
     builder.addCase(login.rejected, (state, action) => {
       state.loginProcessing = false
-      state.loginError = action.error.message as string
+      state.loginError = action.payload as string
 
-      enqueueSnackbar(action.error.message as string, { variant: 'error' })
+      enqueueSnackbar(state.loginError as string, { variant: 'error' })
     })
   },
 })

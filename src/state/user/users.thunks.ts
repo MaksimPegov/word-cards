@@ -5,28 +5,23 @@ export type LoginDTO = {
   password: string
 }
 
-export const mockCredentials: LoginDTO = {
-  username: 'admin',
-  password: 'password',
-}
-
 const login = createAsyncThunk(
   'user/login',
   async (credentials: LoginDTO, { rejectWithValue }) => {
-    console.log('credentials', credentials)
     try {
       const response = await fetch('http://localhost:9001/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(mockCredentials),
+        body: JSON.stringify(credentials),
       })
 
       // First, check the response status
       if (!response.ok) {
-        const error = await response.json().then((json) => json.message)
-        return rejectWithValue(error)
+        const error = await response.json()
+        console.error(error.message)
+        return rejectWithValue(error.message)
       }
 
       // Then, parse the JSON body

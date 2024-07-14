@@ -1,0 +1,30 @@
+@import '/src/styles/styles.scss';
+
+.LoginPage {
+  margin: auto;
+  padding: 10% 5%;
+  display: flex;
+  flex-direction: column;
+  max-width: $screen-m-width;
+
+  &-Title {
+    font-size: 50px !important;
+  }
+
+  &-TextField,
+  &-LoginButton {
+    margin-top: 30px !important;
+  }
+
+  &-Registration {
+    margin-top: 10px !important;
+    color: gray !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &-RegistrationLink {
+    margin-left: 5px !important;
+  }
+}
