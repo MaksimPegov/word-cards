@@ -3,6 +3,13 @@
 .AppHeader {
   padding: 0 10%;
 
+  &-Logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+  }
+
   @media screen and (max-width: $screen-xl-width) {
     padding: 0 5px;
   }

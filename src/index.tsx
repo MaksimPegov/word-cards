@@ -1,19 +1,29 @@
+import { SnackbarProvider } from 'notistack'
+import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from 'reportWebVitals'
-import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
 
 import { store } from 'state/store'
-import { App } from 'App'
+import { Router } from 'Router'
 import 'index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>,
+  <Provider store={store}>
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      autoHideDuration={3000}
+      maxSnack={3}
+    >
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </SnackbarProvider>
+  </Provider>,
 )
 
 // If you want to start measuring performance in your app, pass a function

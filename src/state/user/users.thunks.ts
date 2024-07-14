@@ -33,7 +33,7 @@ const login = createAsyncThunk(
       const data = await response.json().then((json) => json.token)
 
       // Assuming the happy path returns the data
-      return data
+      return { username: credentials.username, token: data }
     } catch (error) {
       return rejectWithValue('An unexpected error occurred')
     }
