@@ -30,7 +30,7 @@ const login = createAsyncThunk(
       // Assuming the happy path returns the data
       return { username: credentials.username, token: data }
     } catch (error) {
-      return rejectWithValue('An unexpected error occurred')
+      return rejectWithValue('Sign is not avaliable now. Please, try again later :(')
     }
   },
 )
@@ -54,7 +54,7 @@ const registration = createAsyncThunk(
         return rejectWithValue(error.message)
       }
     } catch (error) {
-      return rejectWithValue('An unexpected error occurred')
+      return rejectWithValue('Sign up is not avaliable now. Please, try again later :(')
     }
   },
 )

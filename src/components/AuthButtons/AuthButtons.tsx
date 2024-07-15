@@ -15,17 +15,17 @@ export const AuthButtons = () => {
         className={bem('Button', { login: true })}
         variant="outlined"
         color="inherit"
-        onClick={() => navigate('/login')}
+        onClick={() => navigate('/sign-in')}
       >
-        Login
+        sign in
       </Button>
       <Button
         className={bem('Button', { registration: true })}
         variant="contained"
         color="inherit"
-        onClick={() => navigate('/registration')}
+        onClick={() => navigate('/sign-up')}
       >
-        Registration
+        Create account
       </Button>
     </div>
   )

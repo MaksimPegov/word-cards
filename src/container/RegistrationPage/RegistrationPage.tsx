@@ -68,7 +68,7 @@ export const RegistrationPage = () => {
         dispatch(registration({ username, password }))
 
         if (registrationSuccess) {
-          navigate('/login')
+          navigate('/sign-in')
         }
         break
       case RegistrationFormFields.USERNAME:
@@ -84,7 +84,7 @@ export const RegistrationPage = () => {
   }
 
   const navigateToLogin = () => {
-    navigate('/login')
+    navigate('/sign-in')
     dispatch(clearRegistrationSuccess())
   }
 
@@ -104,7 +104,7 @@ export const RegistrationPage = () => {
         align="center"
         className={bem('Title')}
       >
-        Registration
+        Create account
       </Typography>
 
       <form onSubmit={handleSubmit}>
@@ -160,7 +160,7 @@ export const RegistrationPage = () => {
           className={bem('RegistrationButton')}
           disabled={disabled || registrationProgress}
         >
-          register
+          create
         </Button>
       </form>
 
@@ -179,7 +179,7 @@ export const RegistrationPage = () => {
           variant="button"
           className={bem('LoginLink')}
         >
-          login
+          sign in
         </Link>
       </div>
     </div>
@@ -194,7 +194,7 @@ export const RegistrationPage = () => {
         onClick={navigateToLogin}
         className={bem('RegistrationButton')}
       >
-        Go to Login
+        sign in
       </Button>
     </div>
   )

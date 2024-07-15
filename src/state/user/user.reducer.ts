@@ -63,7 +63,7 @@ const UserSlice = createSlice({
 
       setUserToStorage(action.payload)
 
-      enqueueSnackbar('You logged in successfully :)', { variant: 'success' })
+      enqueueSnackbar('Welcom back :)', { variant: 'success' })
     })
     builder.addCase(login.rejected, (state, action) => {
       state.loginProcessing = false
@@ -81,7 +81,7 @@ const UserSlice = createSlice({
       state.registrationProcessing = false
       state.registrationSuccess = true
 
-      enqueueSnackbar('You registered successfully :)', { variant: 'success' })
+      enqueueSnackbar('Account created :)', { variant: 'success' })
     })
     builder.addCase(registration.rejected, (state, action) => {
       state.registrationProcessing = false

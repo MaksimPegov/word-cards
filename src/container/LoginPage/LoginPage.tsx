@@ -47,7 +47,7 @@ export const LoginPage = () => {
   }
 
   const navigateToRegistration = () => () => {
-    navigate('/registration')
+    navigate('/sign-up')
   }
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const LoginPage = () => {
         align="center"
         className={bem('Title')}
       >
-        Login
+        Welcome back!
       </Typography>
 
       <form onSubmit={handleSubmit}>
@@ -103,7 +103,7 @@ export const LoginPage = () => {
           disabled={disabled}
           className={bem('LoginButton')}
         >
-          Login
+          Sign in
         </Button>
       </form>
 
@@ -122,7 +122,7 @@ export const LoginPage = () => {
           variant="button"
           className={bem('RegistrationLink')}
         >
-          registration
+          create account
         </Link>
       </div>
     </div>
