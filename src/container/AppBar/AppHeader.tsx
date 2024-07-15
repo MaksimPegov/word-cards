@@ -9,11 +9,14 @@ import { selectCurrentCollectionId } from 'state/collections/collections.selecto
 import { unselectCollection } from 'state/collections/collections.reducer'
 import { AppDispatch } from 'state/store'
 import 'container/AppBar/AppHeader.scss'
+import { isUserAuthorizedSelector } from 'state/user/user.selector'
+import { AuthButtons } from 'components/AuthButtons/AuthButtons'
 
 const bem = cn('AppHeader')
 
 export const AppHeader: React.FC = () => {
-  const isCollectionSelected = Boolean(useSelector(selectCurrentCollectionId))
+  const isCollectionSelected: boolean = Boolean(useSelector(selectCurrentCollectionId))
+  const isLoggedIn: boolean = useSelector(isUserAuthorizedSelector)
 
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
@@ -64,11 +67,15 @@ export const AppHeader: React.FC = () => {
           </Button>
         ) : null}
 
-        <Tooltip title="Your profile" arrow>
-          <IconButton className={bem('CloudSync')} onClick={togleTooltip}>
-            <AccountBox fontSize="large" />
-          </IconButton>
-        </Tooltip>
+        {isLoggedIn ? (
+          <Tooltip title="Your profile" arrow>
+            <IconButton className={bem('CloudSync')} onClick={togleTooltip}>
+              <AccountBox fontSize="large" />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <AuthButtons />
+        )}
       </Toolbar>
     </AppBar>
   )

@@ -1,0 +1,15 @@
+.AuthButtons {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+
+  &-Button {
+    margin-left: 10px !important;
+    font-weight: bold !important;
+
+    &_registration {
+      color: #1876d2 !important;
+      background-color: white !important;
+    }
+  }
+}
