@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Button, Typography, Container } from '@mui/material'
+import { TextField, Button, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { cn } from '@bem-react/classname'
 import Link from '@mui/material/Link'
 
-import { inProgressSelector, userErrorSelector } from 'state/user/user.selector'
+import { inProgressSelector } from 'state/user/user.selector'
 import { AppDispatch } from 'state/store'
 import { login } from 'state/user/users.thunks'
 import './LoginPage.scss'

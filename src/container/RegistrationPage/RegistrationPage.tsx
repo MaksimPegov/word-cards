@@ -12,7 +12,6 @@ import {
 import { registration } from 'state/user/users.thunks'
 import { AppDispatch } from 'state/store'
 import {
-  registrationErrorSelector,
   registrationInProgressSelector,
   registrationSuccessSelector,
 } from 'state/user/user.selector'
