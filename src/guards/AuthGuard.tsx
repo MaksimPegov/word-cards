@@ -9,7 +9,7 @@ export const AuthGuard = ({ comp }: { comp: ReactNode }) => {
 
   useEffect(() => {
     if (!isLogedIn) {
-      navigate('/login')
+      navigate('/sign-in')
     }
   }, [comp, isLogedIn, navigate])
 

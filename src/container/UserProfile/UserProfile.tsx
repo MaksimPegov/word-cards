@@ -17,7 +17,7 @@ export const UserProfile = () => {
     <div>
       <h1>UserProfile</h1>
       <Button variant="contained" color="primary" onClick={handleLogout}>
-        Logout
+        sign out
       </Button>
     </div>
   )

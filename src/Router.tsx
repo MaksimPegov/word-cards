@@ -16,11 +16,8 @@ export const Router = () => {
       <Routes location={location} key={location.pathname}>
         {/* <Route path="/main" element={<AuthGuard comp={<App />} />} /> */}
         <Route path="/main" element={<App />} />
-        <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
-        <Route
-          path="/registration"
-          element={<UnAuthGuard comp={<RegistrationPage />} />}
-        />
+        <Route path="/sign-in" element={<UnAuthGuard comp={<LoginPage />} />} />
+        <Route path="/sign-up" element={<UnAuthGuard comp={<RegistrationPage />} />} />
         <Route path="/profile" element={<AuthGuard comp={<UserProfile />} />} />
         <Route path="/*" element={<Navigate to="/main" />} />
       </Routes>
