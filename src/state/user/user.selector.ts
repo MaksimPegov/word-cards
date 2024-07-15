@@ -32,3 +32,5 @@ export const registrationSuccessSelector = createSelector(
   selectUserSlice,
   (userState) => userState.registrationSuccess,
 )
+
+export const selectUser = createSelector(selectUserSlice, (userState) => userState.user)

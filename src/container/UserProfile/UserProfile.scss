@@ -1,0 +1,35 @@
+@import '/src/styles/styles.scss';
+
+.UserProfile {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 70%;
+  max-width: $screen-s-width;
+  margin: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 40px;
+
+  &-Title {
+    font-size: 30px !important;
+    align-self: start;
+    padding-bottom: 10px;
+  }
+
+  &-SignOutButton {
+    margin-top: 20px !important;
+    align-self: end;
+  }
+
+  &-UsernameField {
+    display: flex;
+    width: 100%;
+  }
+
+  &-Username {
+    color: #1976d2;
+    font-weight: bold !important;
+    margin-left: auto !important;
+  }
+}
