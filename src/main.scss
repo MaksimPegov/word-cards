@@ -1,0 +1,7 @@
+@import 'styles/styles.scss';
+
+.main {
+  @media screen and (max-width: $screen-l-width) {
+    zoom: 0.8;
+  }
+}

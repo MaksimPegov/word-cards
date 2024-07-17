@@ -13,10 +13,6 @@
     display: flex;
     margin: 50px 0;
     width: -webkit-fill-available;
-
-    @media screen and (max-width: $screen-m-width) {
-      zoom: 0.7;
-    }
   }
 
   &-NavButton {

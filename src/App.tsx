@@ -1,17 +1,26 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import { Divider, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { Button, Divider, Typography } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { selectCurrentCollectionId } from 'state/collections/collections.selector'
 import { SingleCardView } from 'container/SingleCardView/SingleCardView'
 import { CollectionsList } from 'container/Collections/CollectionsList'
 import 'App.scss'
+import { ArrowBackIos } from '@mui/icons-material'
+import { AppDispatch } from 'state/store'
+import { unselectCollection } from 'state/collections/collections.reducer'
 
 const bem = cn('App')
 
 export const App: React.FC = () => {
   const isCollectionSelected = Boolean(useSelector(selectCurrentCollectionId))
+
+  const dispatch = useDispatch<AppDispatch>()
+
+  const collectionsButtonHandler = () => {
+    dispatch(unselectCollection())
+  }
 
   return (
     <div className={bem()}>
@@ -22,7 +31,17 @@ export const App: React.FC = () => {
         <Divider orientation="vertical" className={bem('Divider')} />
         <div className={bem('Cards', { fullScreen: isCollectionSelected })}>
           {isCollectionSelected ? (
-            <SingleCardView />
+            <div>
+              <Button
+                className={bem('BackButton')}
+                variant="text"
+                startIcon={<ArrowBackIos />}
+                onClick={collectionsButtonHandler}
+              >
+                back to collections
+              </Button>
+              <SingleCardView />
+            </div>
           ) : (
             <Typography
               variant="overline"

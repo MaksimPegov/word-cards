@@ -1,13 +1,10 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
 import { AccountBox, Dashboard } from '@mui/icons-material'
-import { AppBar, Button, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { AppBar, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { selectCurrentCollectionId } from 'state/collections/collections.selector'
-import { unselectCollection } from 'state/collections/collections.reducer'
-import { AppDispatch } from 'state/store'
 import 'container/AppBar/AppHeader.scss'
 import { isUserAuthorizedSelector } from 'state/user/user.selector'
 import { AuthButtons } from 'components/AuthButtons/AuthButtons'
@@ -15,10 +12,8 @@ import { AuthButtons } from 'components/AuthButtons/AuthButtons'
 const bem = cn('AppHeader')
 
 export const AppHeader: React.FC = () => {
-  const isCollectionSelected: boolean = Boolean(useSelector(selectCurrentCollectionId))
   const isLoggedIn: boolean = useSelector(isUserAuthorizedSelector)
 
-  const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
 
   const logoClickHandler = () => {
@@ -27,10 +22,6 @@ export const AppHeader: React.FC = () => {
 
   const togleTooltip = () => {
     navigate('/profile')
-  }
-
-  const collectionsButtonHandler = () => {
-    dispatch(unselectCollection())
   }
 
   return (
@@ -55,17 +46,6 @@ export const AppHeader: React.FC = () => {
             CARDS
           </Typography>
         </div>
-
-        {isCollectionSelected ? (
-          <Button
-            color="inherit"
-            className={bem('Button', { Collections: true })}
-            variant="outlined"
-            onClick={collectionsButtonHandler}
-          >
-            Collections
-          </Button>
-        ) : null}
 
         {isLoggedIn ? (
           <Tooltip title="Your profile" arrow>

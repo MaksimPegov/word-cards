@@ -27,6 +27,15 @@
     }
   }
 
+  .App-BackButton {
+    // Bug with sass selector
+    margin: 0 20px;
+
+    @media (min-width: $screen-xl-width) {
+      display: none;
+    }
+  }
+
   &-Cards {
     width: 60%;
 

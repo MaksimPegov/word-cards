@@ -4,14 +4,15 @@ import { AuthGuard, UnAuthGuard } from 'guards'
 import { UserProfile } from 'container/UserProfile/UserProfile'
 import { AppHeader } from 'container/AppBar/AppHeader'
 import { LoginPage } from 'container/LoginPage/LoginPage'
-import { App } from 'App'
 import { RegistrationPage } from 'container/RegistrationPage/RegistrationPage'
+import { App } from 'App'
+import 'main.scss'
 
 export const Router = () => {
   const location = useLocation()
 
   return (
-    <div>
+    <div className="main">
       <AppHeader />
       <Routes location={location} key={location.pathname}>
         {/* <Route path="/main" element={<AuthGuard comp={<App />} />} /> */}

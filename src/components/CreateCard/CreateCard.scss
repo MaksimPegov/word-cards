@@ -8,7 +8,7 @@
   width: auto;
 
   @media screen and (max-width: $screen-s-width) {
-    min-width: 0px;
+    zoom: 0.8;
   }
 
   &-Buttons {
