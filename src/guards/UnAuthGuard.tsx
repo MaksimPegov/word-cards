@@ -9,7 +9,7 @@ export const UnAuthGuard = ({ comp }: { comp: ReactNode }) => {
 
   useEffect(() => {
     if (isLogedIn) {
-      navigate('/profile')
+      navigate('/')
     }
   }, [comp, isLogedIn, navigate])
 
