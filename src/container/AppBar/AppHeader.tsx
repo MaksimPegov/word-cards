@@ -27,7 +27,7 @@ export const AppHeader: React.FC = () => {
   return (
     <AppBar position="static" className={bem()}>
       <Toolbar>
-        <div className={bem('Logo')} onClick={logoClickHandler}>
+        <div className={bem('Logo')} onClick={logoClickHandler} data-testId="LogoBaner">
           <Dashboard sx={{ mr: 1 }} className={bem('Logo')} />
 
           <Typography
