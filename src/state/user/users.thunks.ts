@@ -9,13 +9,16 @@ const login = createAsyncThunk(
   'user/login',
   async (credentials: UserCredentials, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:9001/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://word-cards-api-gateway.up.railway.app/api/users/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(credentials),
         },
-        body: JSON.stringify(credentials),
-      })
+      )
 
       // First, check the response status
       if (!response.ok) {
@@ -39,13 +42,16 @@ const registration = createAsyncThunk(
   'user/registration',
   async (credentials: UserCredentials, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:9001/api/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://word-cards-api-gateway.up.railway.app/api/users/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(credentials),
         },
-        body: JSON.stringify(credentials),
-      })
+      )
 
       // First, check the response status
       if (!response.ok) {
