@@ -25,12 +25,10 @@ export const LoginPage = () => {
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value.trim())
-    console.log(event.target.value)
   }
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value.trim())
-    console.log(event.target.value)
   }
 
   const handleSubmit = (event: React.FormEvent) => {

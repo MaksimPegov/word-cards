@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
+const API_URL = (process.env.REACT_APP_BACKEND_URL as string) + 'users/'
+
 export type UserCredentials = {
   username: string
   password: string
@@ -9,16 +11,13 @@ const login = createAsyncThunk(
   'user/login',
   async (credentials: UserCredentials, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        'https://word-cards-api-gateway.up.railway.app/api/users/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(credentials),
+      const response = await fetch(API_URL + 'login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify(credentials),
+      })
 
       // First, check the response status
       if (!response.ok) {
@@ -42,16 +41,13 @@ const registration = createAsyncThunk(
   'user/registration',
   async (credentials: UserCredentials, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        'https://word-cards-api-gateway.up.railway.app/api/users/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(credentials),
+      const response = await fetch(API_URL + 'login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify(credentials),
+      })
 
       // First, check the response status
       if (!response.ok) {
