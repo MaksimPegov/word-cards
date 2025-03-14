@@ -21,6 +21,6 @@ FROM nginx:latest as prod
 COPY --from=build /word-cards/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

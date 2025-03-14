@@ -10,4 +10,4 @@ docker rm word-cards
 docker build -t word-cards:latest .
 
 # Run a new Docker container
-docker run --name word-cards -d -p 8080:8080 word-cards:latest
+docker run --name word-cards -d -p 80:80 word-cards:latest
